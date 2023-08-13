@@ -44,6 +44,9 @@ then
     exit 1
 fi
 
+# making sure python3.11 can install packages by renaming EXTERNALLY-MANAGED to EXTERNALLY-MANAGED.old
+sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old 
+
 # Install TA-Lib python wrapper
 pip3 install TA-Lib
 
