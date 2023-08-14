@@ -48,6 +48,6 @@ fi
 sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old 
 
 # Install TA-Lib python wrapper
-pip3 install TA-Lib
+sudo pip3 install ta-lib
 
 echo "Setup completed successfully."
