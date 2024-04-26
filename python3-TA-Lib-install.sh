@@ -28,3 +28,5 @@ sudo make -s ARCH=x86_64 install
 cd ..
 sudo rm -r -f -I ta-lib
 rm ta-lib-0.4.0-src.tar.gz
+
+echo "The installation is done. "
