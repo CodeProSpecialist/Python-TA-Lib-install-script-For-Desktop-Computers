@@ -1,53 +1,30 @@
-#!/bin/bash
+sudo apt update
 
-echo "Starting setup..."
+# Install required packages
+sudo apt install -y libhdf5-dev
 
-# Check if python3 is installed
-if ! command -v python3 &> /dev/null
-then
-    echo "Python3 could not be found. Attempting to install..."
-    sudo apt update
-    sudo apt install -y python3
-fi
+# Install TA-Lib dependencies
+echo "Installing TA-Lib dependencies ..."
+sudo apt-get install libatlas-base-dev gfortran -y
 
-# Check if pip3 is installed
-if ! command -v pip3 &> /dev/null
-then
-    echo "pip3 could not be found. Attempting to install..."
-    sudo apt update
-    sudo apt install -y python3-pip
-fi
-
-# Check if build-essential is installed
-if ! command -v gcc &> /dev/null
-then
-    echo "gcc could not be found. Attempting to install build-essential..."
-    sudo apt update
-    sudo apt install -y build-essential
-fi
-
-# Install TA-Lib
-echo "Installing TA-Lib..."
-cd /tmp
+# Download and install TA-Lib
+echo "Downloading TA-Lib..."
 wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-tar -xvzf ta-lib-0.4.0-src.tar.gz
+tar -xzvf ta-lib-0.4.0-src.tar.gz
+
 cd ta-lib/
+echo "Configuring TA-Lib..."
+./configure --prefix=/usr/local --build=x86_64-unknown-linux-gnu
+echo "Building TA-Lib..."
+sudo make -s ARCH=x86_64
+echo "Installing TA-Lib..."
+sudo make -s ARCH=x86_64 install
 
-./configure --build=x86_64
-sudo make all
-sudo make install
+# For Raspberry Pi 4 (aarch64):
+# ./configure --prefix=/usr/local --build=aarch64-unknown-linux-gnu
+# sudo make -s ARCH=aarch64
+# sudo make -s ARCH=aarch64 install
 
-# Check if TA-Lib installed correctly
-if ! ldconfig -p | grep libta_lib.so &> /dev/null
-then
-    echo "TA-Lib could not be found. The installation failed..."
-    exit 1
-fi
-
-# making sure python3.11 can install packages by renaming EXTERNALLY-MANAGED to EXTERNALLY-MANAGED.old
-sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old 
-
-# Install TA-Lib python wrapper
-sudo pip3 install ta-lib
-
-echo "Setup completed successfully."
+cd ..
+sudo rm -r -f -I ta-lib
+rm ta-lib-0.4.0-src.tar.gz
