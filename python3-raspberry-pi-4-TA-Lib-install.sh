@@ -13,11 +13,11 @@ wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
 tar -xzvf ta-lib-0.4.0-src.tar.gz
 
 cd ta-lib/
-echo "Configuring TA-Lib..."
+#echo "Configuring TA-Lib..."
 #./configure --prefix=/usr/local --build=x86_64-unknown-linux-gnu
-echo "Building TA-Lib..."
+#echo "Building TA-Lib..."
 #sudo make -s ARCH=x86_64
-echo "Installing TA-Lib..."
+#echo "Installing TA-Lib..."
 #sudo make -s ARCH=x86_64 install
 
 # For Raspberry Pi 4 (aarch64):
