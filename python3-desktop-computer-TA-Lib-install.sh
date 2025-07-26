@@ -28,8 +28,17 @@ wget https://github.com/TA-Lib/ta-lib/releases/download/v0.6.4/ta-lib-0.6.4-src.
 echo "Extracting and building TA-Lib..."
 tar -xzf ta-lib-0.6.4-src.tar.gz
 cd ta-lib-0.6.4
-chmod +x autogen.sh
-./autogen.sh
+
+# Check if autogen.sh exists before running it
+if [ -f autogen.sh ]; then
+    echo "Running autogen.sh..."
+    chmod +x autogen.sh
+    ./autogen.sh
+else
+    echo "autogen.sh not found, proceeding without it..."
+fi
+
+# Run configure and build
 ./configure --prefix=/usr
 make
 sudo make install
@@ -39,10 +48,10 @@ echo "Updating linker cache..."
 sudo ldconfig
 
 # Step 5: Verify TA-Lib installation
-if [ -f /usr/lib/libta-lib.so ]; then
-    echo "TA-Lib library installed successfully at /usr/lib/libta-lib.so"
+if [ -f /usr/lib/libta_lib.so ]; then
+    echo "TA-Lib library installed successfully at /usr/lib/libta_lib.so"
 else
-    echo "Error: TA-Lib library not found at /usr/lib/libta-lib.so"
+    echo "Error: TA-Lib library not found at /usr/lib/libta_lib.so"
     exit 1
 fi
 
