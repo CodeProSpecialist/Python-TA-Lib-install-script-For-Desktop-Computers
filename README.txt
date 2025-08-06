@@ -1,6 +1,8 @@
-# First run this command: 
+Usage in Linux 
+
+Command Line: 
+
+sh python3-TA-Lib-install.sh
 
 sudo pip3 install ta-lib
 
-# run this command before and after running the install scripts because 
-# for some reason, this does work. 
