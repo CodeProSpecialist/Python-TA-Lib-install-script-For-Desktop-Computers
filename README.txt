@@ -4,5 +4,5 @@ Command Line:
 
 sh python3-TA-Lib-install.sh
 
-sudo pip3 install ta-lib
+pip3 install ta-lib
 
